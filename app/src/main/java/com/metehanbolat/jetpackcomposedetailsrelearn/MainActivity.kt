@@ -3,66 +3,41 @@ package com.metehanbolat.jetpackcomposedetailsrelearn
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.compose.foundation.layout.*
-import androidx.compose.material.Surface
+import androidx.compose.foundation.layout.Column
+import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
 import com.metehanbolat.jetpackcomposedetailsrelearn.ui.theme.JetpackComposeDetailsRelearnTheme
+
+val nameList : List<String> = listOf("Metehan", "Kutay", "Emre", "Oğuz")
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
             JetpackComposeDetailsRelearnTheme {
-                MainScreen()
+                GreetingList(names = nameList)
             }
         }
     }
 }
 
 @Composable
-fun MainScreen() {
-    Surface(
-        color = Color.DarkGray,
-        modifier = Modifier.fillMaxSize()
-    ){
-        Column(
-            modifier = Modifier.fillMaxSize(),
-            /** SpaceAround Composable'lar arasına koyduğu boşluğun yarısı kadar start/end margin verir.*/
-            /** SpaceEvenly Composable'lar arasına koyduğu boşluk kadar start-end margin verir..*/
-            /** SpaceBetween Start/End parent olarak uygulayıp aralardaki composable'lara eşit boşluk verir. */
-            verticalArrangement = Arrangement.SpaceEvenly,
-            horizontalAlignment = Alignment.CenterHorizontally
-        ) {
-            Row(
-                modifier = Modifier.fillMaxWidth(),
-                horizontalArrangement = Arrangement.SpaceEvenly
-            ){
-                ColoredSquare(Color.Magenta)
-                ColoredSquare(Color.Red)
-            }
-            ColoredSquare(Color.Green)
-            ColoredSquare(Color.Cyan)
-            ColoredSquare(Color.White)
+fun GreetingList(names: List<String>) {
+    Column {
+        for (name in names){
+            Greeting(name = name)
         }
     }
 }
 
 @Composable
-fun ColoredSquare(color: Color) {
-    Surface(
-        color = color,
-        modifier = Modifier
-            .size(100.dp)
-    ){ }
+fun Greeting(name: String) {
+    Text(text = "Hello $name!")
 }
 
-@Preview
+@Preview(showBackground = true)
 @Composable
-fun MainScreenPreview() {
-    MainScreen()
+fun GreetingListPreview() {
+    GreetingList(names = nameList)
 }
