@@ -5,6 +5,7 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.material.Text
@@ -32,7 +33,16 @@ fun MainScreen() {
         color = Color.DarkGray,
         modifier = Modifier.fillMaxSize()
     ){
-
+        Surface(
+            color = Color.Magenta,
+            modifier = Modifier.wrapContentSize()
+        ){
+            Text(
+                text = "Wrapped Content",
+                modifier = Modifier.wrapContentSize(),
+                style = MaterialTheme.typography.h3
+            )
+        }
     }
 }
 
