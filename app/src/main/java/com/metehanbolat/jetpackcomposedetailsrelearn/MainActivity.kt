@@ -9,6 +9,7 @@ import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
@@ -33,10 +34,19 @@ fun MainScreen() {
         color = Color.DarkGray,
         modifier = Modifier.fillMaxSize()
     ){
-        Row {
+        Row(
+            modifier = Modifier.fillMaxSize(),
+            /** SpaceAround Composable'lar arasına koyduğu boşluğun yarısı kadar start/end margin verir.*/
+            /** SpaceEvenly Composable'lar arasına koyduğu boşluk kadar start-end margin verir..*/
+            /** SpaceBetween Start/End parent olarak uygulayıp aralardaki composable'lara eşit boşluk verir. */
+            horizontalArrangement = Arrangement.SpaceBetween,
+            verticalAlignment = Alignment.CenterVertically
+        ) {
             HorizontalColoredBar(Color.Magenta)
             HorizontalColoredBar(Color.Red)
             HorizontalColoredBar(Color.Green)
+            HorizontalColoredBar(Color.Cyan)
+            HorizontalColoredBar(Color.White)
         }
     }
 }
