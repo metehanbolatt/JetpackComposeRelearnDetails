@@ -35,25 +35,29 @@ fun MainScreen() {
             /** SpaceAround Composable'lar arasına koyduğu boşluğun yarısı kadar start/end margin verir.*/
             /** SpaceEvenly Composable'lar arasına koyduğu boşluk kadar start-end margin verir..*/
             /** SpaceBetween Start/End parent olarak uygulayıp aralardaki composable'lara eşit boşluk verir. */
-            verticalArrangement = Arrangement.SpaceBetween,
+            verticalArrangement = Arrangement.SpaceEvenly,
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            VerticalColoredBar(Color.Magenta)
-            VerticalColoredBar(Color.Red)
-            VerticalColoredBar(Color.Green)
-            VerticalColoredBar(Color.Cyan)
-            VerticalColoredBar(Color.White)
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.SpaceEvenly
+            ){
+                ColoredSquare(Color.Magenta)
+                ColoredSquare(Color.Red)
+            }
+            ColoredSquare(Color.Green)
+            ColoredSquare(Color.Cyan)
+            ColoredSquare(Color.White)
         }
     }
 }
 
 @Composable
-fun VerticalColoredBar(color: Color) {
+fun ColoredSquare(color: Color) {
     Surface(
         color = color,
         modifier = Modifier
-            .height(60.dp)
-            .fillMaxWidth()
+            .size(100.dp)
     ){ }
 }
 
