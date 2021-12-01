@@ -1,5 +1,6 @@
 package com.metehanbolat.jetpackcomposedetailsrelearn
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -10,38 +11,48 @@ import androidx.compose.material.Button
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.mutableStateListOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import com.metehanbolat.jetpackcomposedetailsrelearn.ui.theme.JetpackComposeDetailsRelearnTheme
-
-val nameList : ArrayList<String> = arrayListOf("Metehan", "Kutay", "Emre", "Oğuz")
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
             JetpackComposeDetailsRelearnTheme {
-                GreetingList(names = nameList)
+                MainScreen()
             }
         }
     }
 }
 
 @Composable
-fun GreetingList(names: List<String>) {
+fun MainScreen() {
     Column(
         modifier = Modifier.fillMaxSize(),
         verticalArrangement = Arrangement.SpaceEvenly,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        for (name in names){
-            Greeting(name = name)
-        }
+        GreetingList()
+    }
+}
 
-        Button(onClick = { nameList.add("New Name") }) {
-            Text(text = "Add New Name")
-        }
+@SuppressLint("UnrememberedMutableState")
+@Composable
+fun GreetingList() {
+    val greetingListState = remember { mutableStateListOf("John", "Amanda") }
+
+    for (name in greetingListState){
+        Greeting(name = name)
+    }
+
+    Button(
+        onClick = { greetingListState.add("Michael") }
+    ) {
+        Text(text = "Add New Name")
     }
 }
 
@@ -56,5 +67,5 @@ fun Greeting(name: String) {
 @Preview(showBackground = true)
 @Composable
 fun GreetingListPreview() {
-    GreetingList(names = nameList)
+    MainScreen()
 }
