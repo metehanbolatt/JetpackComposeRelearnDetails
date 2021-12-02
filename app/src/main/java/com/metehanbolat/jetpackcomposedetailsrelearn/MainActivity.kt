@@ -3,70 +3,64 @@ package com.metehanbolat.jetpackcomposedetailsrelearn
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.material.Button
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Text
-import androidx.compose.material.TextField
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.wrapContentSize
+import androidx.compose.material.Card
+import androidx.compose.material.Surface
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.livedata.observeAsState
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
-import com.metehanbolat.jetpackcomposedetailsrelearn.ui.theme.JetpackComposeDetailsRelearnTheme
+import androidx.compose.ui.unit.dp
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            JetpackComposeDetailsRelearnTheme {
-                MainScreen()
-            }
+            MainScreen()
         }
     }
 }
 
 @Composable
-fun MainScreen(viewModel: MainViewModel = MainViewModel()) {
-    val newNameStateContent = viewModel.textFieldState.observeAsState("")
-
-    Column(
+fun MainScreen() {
+    Surface(
         modifier = Modifier.fillMaxSize(),
-        verticalArrangement = Arrangement.SpaceEvenly,
-        horizontalAlignment = Alignment.CenterHorizontally
+        color = Color.LightGray
+    ){
+        ProfileCard()
+    }
+}
+
+@Composable
+fun ProfileCard() {
+    Card(
+        modifier = Modifier.fillMaxWidth(),
+        elevation = 8.dp
     ) {
-        GreetingMessage(newNameStateContent.value) { newName ->
-            viewModel.onTextChanged(newName)
+        Row(
+            modifier = Modifier.wrapContentSize()
+        ) {
+            ProfilePicture()
+            ProfileContent()
         }
     }
 }
 
 @Composable
-fun GreetingMessage(
-    textFieldValue: String,
-    textFieldUpdate: (newName: String) -> Unit
-) {
-    TextField(value = textFieldValue, onValueChange = textFieldUpdate)
+fun ProfilePicture() {
 
-    Button(
-        onClick = { }
-    ) {
-        Text(text = textFieldValue)
-    }
 }
 
 @Composable
-fun Greeting(name: String) {
-    Text(
-        text = "Hello $name!",
-        style = MaterialTheme.typography.h4
-    )
+fun ProfileContent() {
+
 }
 
 @Preview(showBackground = true)
 @Composable
-fun GreetingListPreview() {
+fun MainScreenPreview() {
     MainScreen()
 }
