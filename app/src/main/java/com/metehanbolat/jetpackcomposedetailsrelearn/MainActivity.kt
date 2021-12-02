@@ -17,12 +17,16 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.metehanbolat.jetpackcomposedetailsrelearn.ui.theme.JetpackComposeDetailsRelearnTheme
+import com.metehanbolat.jetpackcomposedetailsrelearn.ui.theme.LightGreen
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            MainScreen()
+            JetpackComposeDetailsRelearnTheme {
+                MainScreen()
+            }
         }
     }
 }
@@ -30,8 +34,7 @@ class MainActivity : ComponentActivity() {
 @Composable
 fun MainScreen() {
     Surface(
-        modifier = Modifier.fillMaxSize(),
-        color = Color.LightGray
+        modifier = Modifier.fillMaxSize()
     ){
         ProfileCard()
     }
@@ -44,7 +47,8 @@ fun ProfileCard() {
             .padding(16.dp)
             .fillMaxWidth()
             .wrapContentHeight(align = Alignment.Top),
-        elevation = 8.dp
+        elevation = 8.dp,
+        backgroundColor = Color.White
     ) {
         Row(
             modifier = Modifier.fillMaxWidth(),
@@ -60,7 +64,7 @@ fun ProfileCard() {
 fun ProfilePicture() {
     Card(
         shape = CircleShape,
-        border = BorderStroke(width = 2.dp, color = Color.Green),
+        border = BorderStroke(width = 2.dp, color = LightGreen),
         modifier = Modifier.padding(16.dp),
         elevation = 4.dp
     ) {
@@ -91,5 +95,7 @@ fun ProfileContent() {
 @Preview(showBackground = true)
 @Composable
 fun MainScreenPreview() {
-    MainScreen()
+    JetpackComposeDetailsRelearnTheme {
+        MainScreen()
+    }
 }
